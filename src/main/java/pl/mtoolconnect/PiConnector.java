@@ -4,6 +4,8 @@ import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import pl.mtoolconnect.DAO.RaspberryDAO;
 
 public class PiConnector implements RaspberryDAO {
@@ -22,6 +24,17 @@ public class PiConnector implements RaspberryDAO {
         final   GpioPinDigitalInput s3SensorOut = gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, "s3Out");
         final   GpioPinDigitalInput s4SensorIn = gpio.provisionDigitalInputPin(RaspiPin.GPIO_12, "s4In");
         final   GpioPinDigitalInput s4SensorOut = gpio.provisionDigitalInputPin(RaspiPin.GPIO_13, "s4Out");
+
+
+        s1SensorIn.addListener((GpioPinListenerDigital) event -> {
+            // display pin state on console
+            System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+        });
+
+        s1SensorIn.addListener((GpioPinListenerDigital) event -> {
+            // display pin state on console
+            System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+        });
 
 
     }
